@@ -1,7 +1,7 @@
-image: golang:alpine
+image: golang:latest
 
 variables:
-  REPO_NAME: git.bytecode.nl/bytecode/bytecode-react-cli/
+  REPO_NAME: git.bytecode.nl/bytecode/bytecode-react-cli
 
 before_script:
   - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
