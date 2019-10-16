@@ -14,7 +14,7 @@ func main() {
 	flagSetupAndHandler()
 }
 
-func flagSetupAndHandler () {
+func flagSetupAndHandler() {
 	printHelp := flag.Bool("help", false, "Command usage")
 	sourceDirectory := flag.String("dir", "", "Directory in which the component should be created (a subdirectory will be created)")
 	componentName := flag.String("name", "", "The name of the component to be created")
@@ -51,7 +51,7 @@ func generateFolder(destDir string) {
 	}
 }
 
-func generateTemplatedString (name string, templateBase string, fileTemplate fileTemplate) string {
+func generateTemplatedString(name string, templateBase string, fileTemplate fileTemplate) string {
 	t := template.New(name)
 	t, err := t.Parse(templateBase)
 	if err != nil {
@@ -65,31 +65,31 @@ func generateTemplatedString (name string, templateBase string, fileTemplate fil
 	return tBuffer.String()
 }
 
-func saveTemplateFiles (destDir string, componentName string, useRedux bool) {
+func saveTemplateFiles(destDir string, componentName string, useRedux bool) {
 	templateInfo := fileTemplate{ComponentName: componentName}
 
 	if useRedux {
 		mainFile := generateTemplatedString("Main", templateMainFileWithRedux, templateInfo)
-		saveSingleTemplate(mainFile, destDir, componentName + ".tsx")
+		saveSingleTemplate(mainFile, destDir, componentName+".tsx")
 		testFile := generateTemplatedString("Test", templateTestFileWithRedux, templateInfo)
-		saveSingleTemplate(testFile, destDir, componentName + ".test.tsx")
+		saveSingleTemplate(testFile, destDir, componentName+".test.tsx")
 	} else {
 		mainFile := generateTemplatedString("Main", templateMainFileNoRedux, templateInfo)
-		saveSingleTemplate(mainFile, destDir, componentName + ".test.tsx")
+		saveSingleTemplate(mainFile, destDir, componentName+".test.tsx")
 		testFile := generateTemplatedString("Test", templateTestFileNoRedux, templateInfo)
-		saveSingleTemplate(testFile, destDir, componentName + ".test.tsx")
+		saveSingleTemplate(testFile, destDir, componentName+".test.tsx")
 	}
 
 	componentsFile := generateTemplatedString("Components", templateComponentsFile, templateInfo)
-	saveSingleTemplate(componentsFile, destDir, componentName + ".components.ts")
+	saveSingleTemplate(componentsFile, destDir, componentName+".components.ts")
 
 	typesFile := generateTemplatedString("Components", templateTypesFile, templateInfo)
-	saveSingleTemplate(typesFile, destDir, componentName + ".types.ts")
+	saveSingleTemplate(typesFile, destDir, componentName+".types.ts")
 
 	handleSuccess(destDir)
 }
 
-func saveSingleTemplate (templatedString string, destDir string, fileName string) {
+func saveSingleTemplate(templatedString string, destDir string, fileName string) {
 	destFile := destDir + "/" + fileName
 	fileContents := []byte(templatedString)
 	err := ioutil.WriteFile(destFile, fileContents, 0644)
