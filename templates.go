@@ -2,7 +2,7 @@ package main
 
 const templateMainFileNoRedux = `import React from 'React';
 import { {{.ComponentName}}Container } from './{{.ComponentName}}.components';
-import {{.ComponentName}}Props from './import {{.ComponentName}}.types';
+import {{.ComponentName}}Props from './{{.ComponentName}}.types';
 
 const {{.ComponentName}}: React.FC<{{.ComponentName}}Props> = ({ text }) => {
 	return (
@@ -18,7 +18,7 @@ export default {{.ComponentName}};
 const templateMainFileWithRedux = `import React from 'React';
 import { connect } from 'react-redux';
 import { {{.ComponentName}}Container } from './{{.ComponentName}}.components';
-import {{.ComponentName}}Props from './import {{.ComponentName}}.types';
+import {{.ComponentName}}Props from './{{.ComponentName}}.types';
 
 export const {{.ComponentName}}: React.FC<{{.ComponentName}}Props> = ({ text }) => {
 	return (
@@ -43,7 +43,7 @@ export default Connected{{.ComponentName}};
 const templateTestFileNoRedux = `import React from 'react';
 import { mount } from 'enzyme';
 import {{.ComponentName}} from './{{.ComponentName}}';
-	
+
 describe('{{.ComponentName}}', () => {
 	it('should render', () => {
 		const wrapper = mount(<{{.ComponentName}} text="test"/>);
@@ -55,7 +55,7 @@ describe('{{.ComponentName}}', () => {
 const templateTestFileWithRedux = `import React from 'react';
 import { mount } from 'enzyme';
 import { {{.ComponentName}} } from './{{.ComponentName}}';
-	
+
 describe('{{.ComponentName}} without Redux', () => {
 	it('should render', () => {
 		const wrapper = mount(<{{.ComponentName}} text="test"/>);
