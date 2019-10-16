@@ -1,0 +1,32 @@
+image: golang:alpine
+
+variables:
+  REPO_NAME: git.bytecode.nl/bytecode/bytecode-react-cli/
+
+before_script:
+  - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
+  - ln -svf $CI_PROJECT_DIR $GOPATH/src/$REPO_NAME
+  - cd $GOPATH/src/$REPO_NAME
+  - go get -v -d ./...
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - go build
+
+lint:
+  stage: test
+  before_script:
+    - wget -O - -q https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s v1.21.0
+    - golangci-lint --version
+  script:
+    - golangci-lint run
+
+unit_tests:
+  stage: test
+  script:
+    - go test -short $(go list ./... | grep -v /vendor/)
