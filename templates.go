@@ -7,7 +7,7 @@ import {{.ComponentName}}Props from './import {{.ComponentName}}.types';
 const {{.ComponentName}}: React.FC<{{.ComponentName}}Props> = ({ text }) => {
 	return (
 		<{{.ComponentName}}Container>
-			{name}
+			{text}
 		</{{.ComponentName}}Container>
 	);
 };
@@ -23,7 +23,7 @@ import {{.ComponentName}}Props from './import {{.ComponentName}}.types';
 export const {{.ComponentName}}: React.FC<{{.ComponentName}}Props> = ({ text }) => {
 	return (
 		<{{.ComponentName}}Container>
-			{name}
+			{text}
 		</{{.ComponentName}}Container>
 	);
 };
@@ -46,7 +46,7 @@ import {{.ComponentName}} from './{{.ComponentName}}';
 	
 describe('{{.ComponentName}}', () => {
 	it('should render', () => {
-		const wrapper = mount(<{{.ComponentName}} name="test"/>);
+		const wrapper = mount(<{{.ComponentName}} text="test"/>);
 		expect(wrapper.type()).toEqual({{.ComponentName}});
 	});
 });
@@ -58,14 +58,14 @@ import { {{.ComponentName}} } from './{{.ComponentName}}';
 	
 describe('{{.ComponentName}} without Redux', () => {
 	it('should render', () => {
-		const wrapper = mount(<{{.ComponentName}} name="test"/>);
+		const wrapper = mount(<{{.ComponentName}} text="test"/>);
 		expect(wrapper.type()).toEqual({{.ComponentName}});
 	});
 });
 `
 
 const templateTypesFile = `interface {{.ComponentName}}Props {
-	name: string
+	text: string
 }
 
 export default {{.ComponentName}}Props;

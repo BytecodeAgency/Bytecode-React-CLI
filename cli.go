@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"text/template"
@@ -15,7 +16,7 @@ func main() {
 
 func flagSetupAndHandler () {
 	printHelp := flag.Bool("help", false, "Command usage")
-	sourceDirectory := flag.String("dir", "src", "Directory in which the component should be created (a subdirectory will be created)")
+	sourceDirectory := flag.String("dir", "", "Directory in which the component should be created (a subdirectory will be created)")
 	componentName := flag.String("name", "TestComponent", "The name of the component to be created")
 	useRedux := flag.Bool("redux", false, "Connect new file to Redux")
 
@@ -26,53 +27,79 @@ func flagSetupAndHandler () {
 		os.Exit(0)
 	}
 
-	saveTemplateFiles(*sourceDirectory, *componentName, *useRedux)
+	destDir := *sourceDirectory + "/" + *componentName
+	generateFolder(destDir)
+	saveTemplateFiles(destDir, *componentName, *useRedux)
 }
 
 type fileTemplate struct {
 	ComponentName string
 }
 
+func generateFolder(destDir string) {
+	if destDir == "" {
+		log.Fatal("No destDir given, use the -dir flag to mark the destination directory (f.e. src/components), a new subfolder will be automatically created")
+	}
+	err := os.MkdirAll(destDir, 0755)
+	if err != nil {
+		log.Fatal("Error creating destDir: " + err.Error())
+	}
+}
+
 func generateTemplatedString (name string, templateBase string, fileTemplate fileTemplate) string {
 	t := template.New(name)
 	t, err := t.Parse(templateBase)
 	if err != nil {
-		log.Fatal("Parse: ", err)
+		log.Fatal("Parse template err: ", err)
 	}
 	tBuffer := new(bytes.Buffer)
 	err = t.Execute(tBuffer, fileTemplate)
 	if err != nil {
-		log.Fatal("Execute: ", err)
+		log.Fatal("Execute template err: ", err)
 	}
 	return tBuffer.String()
 }
 
-func saveTemplateFiles (sourceDirectory string, componentName string, useRedux bool) {
+func saveTemplateFiles (destDir string, componentName string, useRedux bool) {
 	templateInfo := fileTemplate{ComponentName: componentName}
 
 	if useRedux {
 		mainFile := generateTemplatedString("Main", templateMainFileWithRedux, templateInfo)
+		saveSingleTemplate(mainFile, destDir, componentName + ".tsx")
 		testFile := generateTemplatedString("Test", templateTestFileWithRedux, templateInfo)
-		fmt.Println(mainFile)
-		fmt.Println(testFile)
+		saveSingleTemplate(testFile, destDir, componentName + ".test.tsx")
 	} else {
 		mainFile := generateTemplatedString("Main", templateMainFileNoRedux, templateInfo)
+		saveSingleTemplate(mainFile, destDir, componentName + ".test.tsx")
 		testFile := generateTemplatedString("Test", templateTestFileNoRedux, templateInfo)
-		fmt.Println(mainFile)
-		fmt.Println(testFile)
+		saveSingleTemplate(testFile, destDir, componentName + ".test.tsx")
 	}
 
 	componentsFile := generateTemplatedString("Components", templateComponentsFile, templateInfo)
-	fmt.Println(componentsFile)
+	saveSingleTemplate(componentsFile, destDir, componentName + ".components.ts")
 
 	typesFile := generateTemplatedString("Components", templateTypesFile, templateInfo)
-	fmt.Println(typesFile)
+	saveSingleTemplate(typesFile, destDir, componentName + ".types.ts")
 
-	fmt.Println(sourceDirectory)
-	fmt.Println(componentName)
-	fmt.Println(useRedux)
+	handleSuccess(destDir)
 }
 
-//func saveSingleTemplate (templatedString string, fileDest string) {
-//
-//}
+func saveSingleTemplate (templatedString string, destDir string, fileName string) {
+	destFile := destDir + "/" + fileName
+	fileContents := []byte(templatedString)
+	err := ioutil.WriteFile(destFile, fileContents, 0644)
+	if err != nil {
+		log.Fatal("Error saving file: " + err.Error())
+	}
+}
+
+func handleSuccess(destDir string) {
+	fmt.Println("SUCCESS: Finished writing files to the " + destDir + " directory.")
+	filesInDestDir, err := ioutil.ReadDir("./" + destDir)
+	if err != nil {
+		log.Fatal("Error reading destDir contents: " + err.Error())
+	}
+	for _, f := range filesInDestDir {
+		fmt.Println("  -> " + destDir + "/" + f.Name())
+	}
+}

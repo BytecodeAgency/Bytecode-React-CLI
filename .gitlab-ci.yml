@@ -30,3 +30,8 @@ unit_tests:
   stage: test
   script:
     - go test -short $(go list ./... | grep -v /vendor/)
+
+test_run:
+  stage: test
+  script:
+    - . -dir src/components -redux -name TestComponent
