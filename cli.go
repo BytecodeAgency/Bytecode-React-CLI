@@ -17,7 +17,7 @@ func main() {
 func flagSetupAndHandler () {
 	printHelp := flag.Bool("help", false, "Command usage")
 	sourceDirectory := flag.String("dir", "", "Directory in which the component should be created (a subdirectory will be created)")
-	componentName := flag.String("name", "TestComponent", "The name of the component to be created")
+	componentName := flag.String("name", "", "The name of the component to be created")
 	useRedux := flag.Bool("redux", false, "Connect new file to Redux")
 
 	flag.Parse()
@@ -28,6 +28,14 @@ func flagSetupAndHandler () {
 	}
 
 	destDir := *sourceDirectory + "/" + *componentName
+
+	if destDir == "" {
+		log.Fatal("No destDir given, use the -dir flag to mark the destination directory (f.e. src/components), a new subfolder will be automatically created")
+	}
+	if *componentName == "" {
+		log.Fatal("No component name given")
+	}
+
 	generateFolder(destDir)
 	saveTemplateFiles(destDir, *componentName, *useRedux)
 }
@@ -37,9 +45,6 @@ type fileTemplate struct {
 }
 
 func generateFolder(destDir string) {
-	if destDir == "" {
-		log.Fatal("No destDir given, use the -dir flag to mark the destination directory (f.e. src/components), a new subfolder will be automatically created")
-	}
 	err := os.MkdirAll(destDir, 0755)
 	if err != nil {
 		log.Fatal("Error creating destDir: " + err.Error())
