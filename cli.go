@@ -75,7 +75,7 @@ func saveTemplateFiles(destDir string, componentName string, useRedux bool) {
 		saveSingleTemplate(testFile, destDir, componentName+".test.tsx")
 	} else {
 		mainFile := generateTemplatedString("Main", templateMainFileNoRedux, templateInfo)
-		saveSingleTemplate(mainFile, destDir, componentName+".test.tsx")
+		saveSingleTemplate(mainFile, destDir, componentName+".tsx")
 		testFile := generateTemplatedString("Test", templateTestFileNoRedux, templateInfo)
 		saveSingleTemplate(testFile, destDir, componentName+".test.tsx")
 	}
