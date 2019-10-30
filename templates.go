@@ -1,6 +1,6 @@
 package main
 
-const templateMainFileNoRedux = `import React from 'React';
+const templateMainFileNoRedux = `import React from 'react';
 import { {{.ComponentName}}Container } from './{{.ComponentName}}.components';
 import {{.ComponentName}}Props from './{{.ComponentName}}.types';
 
@@ -15,7 +15,7 @@ const {{.ComponentName}}: React.FC<{{.ComponentName}}Props> = ({ text }) => {
 export default {{.ComponentName}};
 `
 
-const templateMainFileWithRedux = `import React from 'React';
+const templateMainFileWithRedux = `import React from 'react';
 import { connect } from 'react-redux';
 import { {{.ComponentName}}Container } from './{{.ComponentName}}.components';
 import {{.ComponentName}}Props from './{{.ComponentName}}.types';
@@ -64,11 +64,9 @@ describe('{{.ComponentName}} without Redux', () => {
 });
 `
 
-const templateTypesFile = `interface {{.ComponentName}}Props {
+const templateTypesFile = `export default interface {{.ComponentName}}Props {
 	text: string
 }
-
-export default {{.ComponentName}}Props;
 `
 
 const templateComponentsFile = `import styled from 'styled-components';
