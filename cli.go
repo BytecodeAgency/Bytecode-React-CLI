@@ -19,6 +19,7 @@ func flagSetupAndHandler() {
 	sourceDirectory := flag.String("dir", "", "Directory in which the component should be created (a subdirectory will be created)")
 	componentName := flag.String("name", "", "The name of the component to be created")
 	useRedux := flag.Bool("redux", false, "Connect new file to Redux")
+	isReactNative := flag.Bool("native", false, "Use the templates for React Native instead of React Web")
 
 	flag.Parse()
 
@@ -37,7 +38,7 @@ func flagSetupAndHandler() {
 	}
 
 	generateFolder(destDir)
-	saveTemplateFiles(destDir, *componentName, *useRedux)
+	saveTemplateFiles(destDir, *componentName, *useRedux, *isReactNative)
 }
 
 type fileTemplate struct {
@@ -65,7 +66,7 @@ func generateTemplatedString(name string, templateBase string, fileTemplate file
 	return tBuffer.String()
 }
 
-func saveTemplateFiles(destDir string, componentName string, useRedux bool) {
+func saveTemplateFiles(destDir string, componentName string, useRedux bool, isReactNative bool) {
 	templateInfo := fileTemplate{ComponentName: componentName}
 
 	if useRedux {
@@ -80,8 +81,14 @@ func saveTemplateFiles(destDir string, componentName string, useRedux bool) {
 		saveSingleTemplate(testFile, destDir, componentName+".test.tsx")
 	}
 
-	componentsFile := generateTemplatedString("Components", templateComponentsFile, templateInfo)
-	saveSingleTemplate(componentsFile, destDir, componentName+".components.ts")
+	if isReactNative {
+		componentsFile := generateTemplatedString("Components", templateComponentsFileNative, templateInfo)
+		saveSingleTemplate(componentsFile, destDir, componentName+".components.ts")
+	} else {
+		componentsFile := generateTemplatedString("Components", templateComponentsFileWeb, templateInfo)
+		saveSingleTemplate(componentsFile, destDir, componentName+".components.ts")
+	}
+
 
 	typesFile := generateTemplatedString("Components", templateTypesFile, templateInfo)
 	saveSingleTemplate(typesFile, destDir, componentName+".types.ts")

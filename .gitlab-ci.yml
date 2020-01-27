@@ -34,5 +34,8 @@ unit_tests:
 test_run:
   stage: test
   script:
-    - go run . -dir src/components -name TestComponentNoRedux
-    - go run . -dir src/components -redux -name TestComponent
+    - go run -help
+    - go run . -dir src/components -name TestComponentNoReduxWeb
+    - go run . -dir src/components -name TestComponentNoReduxNative -native
+    - go run . -dir src/components -redux -name TestComponentWeb
+    - go run . -dir src/components -redux -name TestComponentNative -native

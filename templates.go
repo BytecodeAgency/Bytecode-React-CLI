@@ -69,7 +69,13 @@ const templateTypesFile = `export default interface {{.ComponentName}}Props {
 }
 `
 
-const templateComponentsFile = `import styled from 'styled-components';
+const templateComponentsFileNative = `import styled from 'styled-components/native';
+
+export const {{.ComponentName}}Container = styled.View` + "`" + `
+margin: 10px;
+` + "`;\n"
+
+const templateComponentsFileWeb = `import styled from 'styled-components';
 
 export const {{.ComponentName}}Container = styled.div` + "`" + `
 	margin: 10px;

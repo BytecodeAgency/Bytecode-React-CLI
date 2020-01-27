@@ -16,7 +16,7 @@ You can use the CLI the following ways:
 $ bcr -dir {{destination_directory}} -name {{component_name}}
 ```
 
-### With Redux 
+### With Redux
 
 ```bash
 $ bcr -dir {{destination_directory}} -name {{component_name}} -redux
@@ -33,5 +33,6 @@ $ bcr -dir src/components -redux -name TestComponent
 | Flag | Effect |
 | ---- | ------ |
 | `-dir` | Set the source directory. Do not start or end with `/`
-| `-name` | Component name, do not include filename extension 
+| `-name` | Component name, do not include filename extension
 | `-redux` | Include connection to Redux
+| `-native` | Use React Native specific templates
