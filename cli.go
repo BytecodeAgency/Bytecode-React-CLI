@@ -89,7 +89,6 @@ func saveTemplateFiles(destDir string, componentName string, useRedux bool, isRe
 		saveSingleTemplate(componentsFile, destDir, componentName+".components.ts")
 	}
 
-
 	typesFile := generateTemplatedString("Components", templateTypesFile, templateInfo)
 	saveSingleTemplate(typesFile, destDir, componentName+".types.ts")
 
