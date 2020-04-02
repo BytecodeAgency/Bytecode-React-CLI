@@ -1,5 +1,5 @@
 const cli = require("./cli");
-const writer = require("writefile");
+const writer = require("./writefile");
 const templates = require("./templates");
 
 const config = {
@@ -18,15 +18,21 @@ const questions = [
     {
         type: "input",
         name: "name",
-        message: "What should the name be",
+        message: "What should the component/domain name be",
     },
 ];
 
 const app = () => cli(questions).then((ans) => handleAnswers(ans));
 
 const handleAnswers = (answers) => {
-    console.log(answers);
-    console.log(templates.reactWebNoRedux(answers.name));
+    const { type, name } = answers;
+    const selectedOption = config.options[type];
+    filesToCreate = templates[selectedOption.template](name);
+    const fileDataArr = Object.entries(filesToCreate);
+    fileDataArr.forEach(fileData => {
+        const [fileName, fileContents] = fileData;
+        writer(selectedOption.path, fileName, fileContents)
+    })
 };
 
 module.exports = app;
