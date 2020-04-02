@@ -8,7 +8,7 @@ const config = {
         Container: { path: "src/containers", template: "reactWebWithRedux" },
         Section: { path: "src/sections", template: "reactWebWithRedux" },
         Page: { path: "src/pages", template: "reactWebNoRedux" },
-//        ReduxDomain: { path: "src/store", template: "reduxDomain" },
+        //        ReduxDomain: { path: "src/store", template: "reduxDomain" },
     },
 };
 
@@ -33,10 +33,10 @@ const handleAnswers = (answers) => {
     const selectedOption = config.options[type];
     filesToCreate = templates[selectedOption.template](name);
     const fileDataArr = Object.entries(filesToCreate);
-    fileDataArr.forEach(fileData => {
+    fileDataArr.forEach((fileData) => {
         const [fileName, fileContents] = fileData;
-        writer(selectedOption.path, fileName, fileContents)
-    })
+        writer(selectedOption.path, fileName, fileContents);
+    });
 };
 
 module.exports = app;
