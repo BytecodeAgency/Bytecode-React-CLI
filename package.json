@@ -9,5 +9,8 @@
   "private": false,
   "bin": {
     "bcr": "./bin/cli.js"
+  },
+  "dependencies": {
+    "inquirer": "^7.1.0"
   }
 }

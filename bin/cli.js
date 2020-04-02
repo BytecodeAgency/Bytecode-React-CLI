@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-console.log("hello world")
+const app = require('..')
+
+app();
