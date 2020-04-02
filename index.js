@@ -12,7 +12,7 @@ const config = { // TODO: create support for config file in repo
             path: "src/store",
             template: "reduxDomain",
             additionalInstructions:
-                "Don't forget to add your domain to the `src/store/rootReducer.ts` file",
+                "Don't forget to add your domain to the `src/store/rootReducer.ts` file and the StoreState type",
         },
     },
 };

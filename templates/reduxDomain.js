@@ -12,28 +12,31 @@ const reduxDomain = (name) => {
 module.exports = reduxDomain;
 
 const action = (name) => `import { Dispatch } from 'react-redux;
-import ${cap(name)}Actions from './${name}.constants.ts';
+import DomainActions from './domain.constants';
 
-const ${name}AddError = (error: string) => (dispatch: Dispatch): Promise<void> => {
-    dispatch({
-        type: ${cap(name)}Actions.AddError,
+const domainAddError = (error: string) => (dispatch: Dispatch) => {
+    return dispatch({
+        type: DomainActions.AddError,
         payload: {
             error,
         }
     })
 }
-`;
-const actionTest = (name) => `actionTest`;
-const reducer = (name) => `import ${cap(name)}Actions from './${name}.constants.ts';
-import ${cap(name)}State, { ${cap(name)}Actions } from './${name}.types.ts'
+`.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
-const initialState: ${cap(name)}State {
+const actionTest = (name) => `actionTest
+`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+
+const reducer = (name) => `import DomainActions from './domain.constants';
+import DomainState, { DomainDispatches } from './domain.types'
+
+const initialState: DomainState = {
     errors: null,
 }
 
-const ${name}Reducer = (state: ${cap(name)}State = initialState, action: ${cap(name)}Actions) => {
+const domainReducer = (state: DomainState = initialState, action: DomainDispatches) => {
     switch (action.type) {
-        case ${cap(name)}Actions.AddError:
+        case DomainActions.AddError:
             return {
                 ...state,
                 errors: [
@@ -45,26 +48,32 @@ const ${name}Reducer = (state: ${cap(name)}State = initialState, action: ${cap(n
             return state;
     }
 }
-`;
-const reducerTest = (name) => `reducerTest`;
-const types = (name) => `import ${cap(name)}Actions from './${name}.constants.ts'
+`.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
-export default interface ${cap(name)}State {
+const reducerTest = (name) => `reducerTest
+`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+
+const types = (name) => `import DomainActions from './domain.constants'
+
+export default interface DomainState {
     errors: string[] | null; // TODO: Add errors to Dispatch type, as per Flux conventions
 }
 
-interface ${cap(name)}Dispatch<Action, PayloadType> {
+interface DomainDispatch<Action, PayloadType> {
     type: ActionType;
     payload: PayloadType;
 }
 
-type ${cap(name)}AddError = ${cap(name)}Dispatch<${cap(name)}Actions.AddError, { error: string }>
+type DomainAddError = DomainDispatch<DomainActions.AddError, { error: string }>
 
-export type ${cap(name)}Dispatch = ${cap(name)}AddError | // Add more types here
-`;
+export type DomainDispatches = DomainAddError // | Add more types here
+`.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
-const constants = (name) => `export default enum ${cap(name)}Actions {
+const constants = (name) => `enum DomainActions {
     AddError = "AddError",
-}`;
+}
+
+export default DomainActions
+`.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
 const cap = (string) => string.charAt(0).toUpperCase() + string.slice(1);
