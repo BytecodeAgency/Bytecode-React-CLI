@@ -1,6 +1,6 @@
 const { main, tests, types } = require("./reactShared");
 
-const reactNoRedux = (name) => {
+const reactWebNoRedux = (name) => {
     const files = {};
     files[`${name}.tsx`] = main(name);
     files[`${name}.test.tsx`] = tests(name);
@@ -9,7 +9,7 @@ const reactNoRedux = (name) => {
     return files;
 };
 
-module.exports = reactNoRedux;
+module.exports = reactWebNoRedux;
 
 const components = (name) => `import styled from 'styled-components';
 
