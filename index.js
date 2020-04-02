@@ -41,7 +41,8 @@ const handleAnswers = (answers) => {
     const fileDataArr = Object.entries(filesToCreate);
     fileDataArr.forEach((fileData) => {
         const [fileName, fileContents] = fileData;
-        writer(selectedOption.path, fileName, fileContents);
+        const destDir = `${selectedOption.path}/${name}`
+        writer(destDir, fileName, fileContents);
     });
     if (selectedOption.additionalInstructions) {
         console.log(selectedOption.additionalInstructions);
