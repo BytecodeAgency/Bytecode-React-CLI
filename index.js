@@ -2,7 +2,7 @@ const cli = require("./cli");
 const writer = require("./writefile");
 const templates = require("./templates");
 
-const config = {
+const config = { // TODO: create support for config file in repo
     options: {
         Component: { path: "src/components", template: "reactWebNoRedux" },
         Container: { path: "src/containers", template: "reactWebWithRedux" },
