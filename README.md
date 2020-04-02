@@ -1,38 +1,65 @@
 # Bytecode React CLI
 
+> Currently in alpha phase, the CLI API is not yet stable
+
 A command-line tool to generate React components in Typescript following the conventions at Bytecode.
 
 ## Installation
 
-Use `go build` to generate a binary, rename the binary to `bcr` (Bytecode React). Add this binary to your `$PATH`.
+Run `yarn add -D bytecode-react-cli`.
 
 ## Usage
 
-You can use the CLI the following ways:
+You can use the CLI by adding the command to your `package.json` script section: `"bcr": "./node_modules/bytecode-react-cli/bin/cli.js"`.
 
-### Without Redux
+Before you can use the CLI tool, add a `.bcr-config.js` file, f.e.:
 
-```bash
-$ bcr -dir {{destination_directory}} -name {{component_name}}
+Web:
+
+```js
+module.exports = {
+    options: {
+        Component: { path: "src/components", template: "reactWebNoRedux" },
+        Container: { path: "src/containers", template: "reactWebWithRedux" },
+        Section: { path: "src/sections", template: "reactWebWithRedux" },
+        Page: { path: "src/pages", template: "reactWebNoRedux" },
+        ReduxDomain: {
+            path: "src/store",
+            template: "reduxDomain",
+            additionalInstructions:
+                "Don't forget to add your domain to the `src/store/rootReducer.ts` file and the StoreState type",
+        },
+    },
+};
 ```
 
-### With Redux
+Or for native:
 
-```bash
-$ bcr -dir {{destination_directory}} -name {{component_name}} -redux
+```js
+module.exports = {
+    options: {
+        Component: { path: "src/components", template: "reactNativeNoRedux" },
+        Container: { path: "src/containers", template: "reactNativeWithRedux" },
+        Section: { path: "src/sections", template: "reactNativeWithRedux" },
+        Page: { path: "src/pages", template: "reactNativeNoRedux" },
+        ReduxDomain: {
+            path: "src/store",
+            template: "reduxDomain",
+            additionalInstructions:
+                "Don't forget to add your domain to the `src/store/rootReducer.ts` file and the StoreState type",
+        },
+    },
+};
 ```
 
-### Example
+## Available templates
 
-```bash
-$ bcr -dir src/components -redux -name TestComponent
-```
+* `reactWebNoRedux`
+* `reactWebWithRedux`
+* `reactNativeNoRedux`
+* `reactNativeWithRedux`
+* `reduxDomain`
 
-## Options
+## License
 
-| Flag | Effect |
-| ---- | ------ |
-| `-dir` | Set the source directory. Do not start or end with `/`
-| `-name` | Component name, do not include filename extension
-| `-redux` | Include connection to Redux
-| `-native` | Use React Native specific templates
+GPL-3.0-only

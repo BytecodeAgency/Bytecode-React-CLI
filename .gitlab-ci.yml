@@ -1,41 +1,8 @@
-image: golang:latest
-
-variables:
-  REPO_NAME: git.bytecode.nl/bytecode/bytecode-react-cli
-
-before_script:
-  - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
-  - ln -svf $CI_PROJECT_DIR $GOPATH/src/$REPO_NAME
-  - cd $GOPATH/src/$REPO_NAME
-  - go get -v -d ./...
-
-stages:
-  - build
-  - test
-
-build:
-  stage: build
-  script:
-    - go build
-
-lint:
-  stage: test
-  before_script:
-    - curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh -s -- -b $(go env GOPATH)/bin v1.21.0
-    - golangci-lint --version
-  script:
-    - golangci-lint run
-
-unit_tests:
-  stage: test
-  script:
-    - go test -short $(go list ./... | grep -v /vendor/)
+image: node:12
 
 test_run:
   stage: test
+  before_script:
+    - yarn
   script:
-    - go run . -help
-    - go run . -dir src/components -name TestComponentNoReduxWeb
-    - go run . -dir src/components -name TestComponentNoReduxNative -native
-    - go run . -dir src/components -redux -name TestComponentWeb
-    - go run . -dir src/components -redux -name TestComponentNative -native
+    - yarn run lint:ci

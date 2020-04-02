@@ -1,0 +1,25 @@
+{
+  "name": "bytecode-react-cli",
+  "version": "0.1.4",
+  "description": "The Bytecode React CLI tool",
+  "main": "index.js",
+  "repository": "https://github.com/BytecodeAgency/Bytecode-React-CLI.git",
+  "homepage": "https://github.com/BytecodeAgency/Bytecode-React-CLI",
+  "keywords": ["bytecode", "bytecodeagency", "react", "redux", "cli", "code generation"],
+  "author": "Luciano Nooijen <luciano@bytecode.nl>",
+  "license": "GPL-3.0-only",
+  "private": false,
+  "bin": {
+    "bcr": "./bin/cli.js"
+  },
+  "scripts": {
+    "lint": "prettier --write \"./**/*.js\"",
+    "lint:ci": "prettier -c \"./**/*.js\""
+  },
+  "dependencies": {
+    "inquirer": "^7.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.2"
+  }
+}
