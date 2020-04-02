@@ -1,37 +1,23 @@
+const path = require("path");
 const cli = require("./cli");
 const writer = require("./writefile");
 const templates = require("./templates");
 
-const config = {
-    // TODO: create support for config file in repo
-    options: {
-        ComponentWeb: { path: "src/components", template: "reactWebNoRedux" },
-        ContainerWeb: { path: "src/containers", template: "reactWebWithRedux" },
-        SectionWeb: { path: "src/sections", template: "reactWebWithRedux" },
-        PageWeb: { path: "src/pages", template: "reactWebNoRedux" },
-        ComponentNative: {
-            path: "src/components",
-            template: "reactNativeNoRedux",
-        },
-        ContainerNative: {
-            path: "src/containers",
-            template: "reactNativeWithRedux",
-        },
-        SectionNative: {
-            path: "src/sections",
-            template: "reactNativeWithRedux",
-        },
-        PageNative: { path: "src/pages", template: "reactNativeNoRedux" },
-        ReduxDomain: {
-            path: "src/store",
-            template: "reduxDomain",
-            additionalInstructions:
-                "Don't forget to add your domain to the `src/store/rootReducer.ts` file and the StoreState type",
-        },
-    },
+const getConfig = () => {
+    const currentDir = path.resolve();
+    const fileName = ".bcr-config.js";
+    const requiredFile = `${currentDir}/${fileName}`;
+    const config = require(requiredFile);
+    if (!config) {
+        console.log(
+            "The .bcr-config.js file was not found. For installation instructions, check the README.md file."
+        );
+        process.exit(1);
+    }
+    return config;
 };
 
-const questions = [
+const getQuestions = (config) => [
     {
         type: "list",
         name: "type",
@@ -42,15 +28,19 @@ const questions = [
         type: "input",
         name: "name",
         message:
-            "What should the component/domain name be (please capitalize for React components, and camelCase for Redux domains)",
+            "What should the component/domain name be (please use PascalCase for React components, and camelCase for Redux domains)",
     },
 ];
 
-const app = () => cli(questions).then((ans) => handleAnswers(ans));
+const app = () => {
+    const config = getConfig();
+    const questions = getQuestions(config);
+    cli(questions).then((ans) => handleAnswers(ans));
+};
 
 const handleAnswers = (answers) => {
     const { type, name } = answers;
-    const selectedOption = config.options[type];
+    const selectedOption = getConfig().options[type];
     filesToCreate = templates[selectedOption.template](name);
     const fileDataArr = Object.entries(filesToCreate);
     fileDataArr.forEach((fileData) => {
