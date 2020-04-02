@@ -10,7 +10,13 @@
   "bin": {
     "bcr": "./bin/cli.js"
   },
+  "scripts": {
+    "lint": "prettier --write \"./**/*.js\""
+  },
   "dependencies": {
     "inquirer": "^7.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.2"
   }
 }
