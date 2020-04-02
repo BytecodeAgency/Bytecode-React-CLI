@@ -4,35 +4,14 @@ A command-line tool to generate React components in Typescript following the con
 
 ## Installation
 
-Use `go build` to generate a binary, rename the binary to `bcr` (Bytecode React). Add this binary to your `$PATH`.
+Run `yarn add -D bytecode-react-cli`.
 
 ## Usage
 
-You can use the CLI the following ways:
+You can use the CLI by adding the command to your `package.json` script section.
 
-### Without Redux
+First run `[your-set-command] init` and set your desired configuration in the config file
 
-```bash
-$ bcr -dir {{destination_directory}} -name {{component_name}}
-```
+## License
 
-### With Redux
-
-```bash
-$ bcr -dir {{destination_directory}} -name {{component_name}} -redux
-```
-
-### Example
-
-```bash
-$ bcr -dir src/components -redux -name TestComponent
-```
-
-## Options
-
-| Flag | Effect |
-| ---- | ------ |
-| `-dir` | Set the source directory. Do not start or end with `/`
-| `-name` | Component name, do not include filename extension
-| `-redux` | Include connection to Redux
-| `-native` | Use React Native specific templates
+GPL-3.0-only
