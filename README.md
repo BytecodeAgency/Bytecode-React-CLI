@@ -1,5 +1,7 @@
 # Bytecode React CLI
 
+> Currently in alpha phase, the CLI API is not yet stable
+
 A command-line tool to generate React components in Typescript following the conventions at Bytecode.
 
 ## Installation
@@ -8,7 +10,7 @@ Run `yarn add -D bytecode-react-cli`.
 
 ## Usage
 
-You can use the CLI by adding the command to your `package.json` script section.
+You can use the CLI by adding the command to your `package.json` script section: `"bcr": "./node_modules/bytecode-react-cli/bin/cli.js"`.
 
 Before you can use the CLI tool, add a `.bcr-config.js` file, f.e.:
 
