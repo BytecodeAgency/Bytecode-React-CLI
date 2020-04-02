@@ -2,7 +2,8 @@ const cli = require("./cli");
 const writer = require("./writefile");
 const templates = require("./templates");
 
-const config = { // TODO: create support for config file in repo
+const config = {
+    // TODO: create support for config file in repo
     options: {
         Component: { path: "src/components", template: "reactWebNoRedux" },
         Container: { path: "src/containers", template: "reactWebWithRedux" },
@@ -41,7 +42,7 @@ const handleAnswers = (answers) => {
     const fileDataArr = Object.entries(filesToCreate);
     fileDataArr.forEach((fileData) => {
         const [fileName, fileContents] = fileData;
-        const destDir = `${selectedOption.path}/${name}`
+        const destDir = `${selectedOption.path}/${name}`;
         writer(destDir, fileName, fileContents);
     });
     if (selectedOption.additionalInstructions) {

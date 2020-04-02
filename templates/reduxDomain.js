@@ -11,7 +11,8 @@ const reduxDomain = (name) => {
 
 module.exports = reduxDomain;
 
-const action = (name) => `import { Dispatch } from 'react-redux;
+const action = (name) =>
+    `import { Dispatch } from 'react-redux;
 import DomainActions from './domain.constants';
 
 const domainAddError = (error: string) => (dispatch: Dispatch) => {
@@ -22,9 +23,12 @@ const domainAddError = (error: string) => (dispatch: Dispatch) => {
         }
     })
 }
-`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+`
+        .replace(/domain/g, name)
+        .replace(/Domain/g, cap(name));
 
-const actionTest = (name) => `import { domainAddError } from './domain.actions';
+const actionTest = (name) =>
+    `import { domainAddError } from './domain.actions';
 
 describe('domainAddError', () => {
     it('should dispatch correctly', () => {
@@ -35,9 +39,12 @@ describe('domainAddError', () => {
         expect(mockDispatch.mock.calls[0][0].payload.error).toEqual(testError);
     });
 });
-`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+`
+        .replace(/domain/g, name)
+        .replace(/Domain/g, cap(name));
 
-const reducer = (name) => `import DomainActions from './domain.constants';
+const reducer = (name) =>
+    `import DomainActions from './domain.constants';
 import DomainState, { DomainDispatches } from './domain.types'
 
 export const initialState: DomainState = {
@@ -60,9 +67,12 @@ const domainReducer = (state: DomainState = initialState, action: DomainDispatch
 };
 
 export default domainReducer;
-`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+`
+        .replace(/domain/g, name)
+        .replace(/Domain/g, cap(name));
 
-const reducerTest = (name) => `import domainReducer, { initialState } from './domain.reducer'
+const reducerTest = (name) =>
+    `import domainReducer, { initialState } from './domain.reducer'
 import DomainActions from './domain.constants';
 
 describe('domainReducer', () => {
@@ -79,9 +89,12 @@ describe('domainReducer', () => {
         expect(state.errors[0]).toEqual(newError);
     })
 });
-`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+`
+        .replace(/domain/g, name)
+        .replace(/Domain/g, cap(name));
 
-const types = (name) => `import DomainActions from './domain.constants'
+const types = (name) =>
+    `import DomainActions from './domain.constants'
 
 export default interface DomainState {
     errors: string[]; // TODO: Add errors to Dispatch type, as per Flux conventions
@@ -95,13 +108,18 @@ interface DomainDispatch<Action, PayloadType> {
 type DomainAddError = DomainDispatch<DomainActions.AddError, { error: string }>
 
 export type DomainDispatches = DomainAddError // | Add more types here
-`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+`
+        .replace(/domain/g, name)
+        .replace(/Domain/g, cap(name));
 
-const constants = (name) => `enum DomainActions {
+const constants = (name) =>
+    `enum DomainActions {
     AddError = "AddError",
 }
 
 export default DomainActions
-`.replace(/domain/g, name).replace(/Domain/g, cap(name));
+`
+        .replace(/domain/g, name)
+        .replace(/Domain/g, cap(name));
 
 const cap = (string) => string.charAt(0).toUpperCase() + string.slice(1);
