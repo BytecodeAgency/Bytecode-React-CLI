@@ -24,14 +24,24 @@ const domainAddError = (error: string) => (dispatch: Dispatch) => {
 }
 `.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
-const actionTest = (name) => `actionTest
+const actionTest = (name) => `import { domainAddError } from './domain.actions';
+
+describe('domainAddError', () => {
+    it('should dispatch correctly', () => {
+        const mockDispatch: jest.Mock = jest.fn((): void => {});
+        const testError = 'this is a test error';
+        domainAddError(testError)(mockDispatch)
+        expect(mockDispatch.mock.calls).toHaveLength(1);
+        expect(mockDispatch.mock.calls[0][0].payload.error).toEqual(testError);
+    });
+});
 `.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
 const reducer = (name) => `import DomainActions from './domain.constants';
 import DomainState, { DomainDispatches } from './domain.types'
 
-const initialState: DomainState = {
-    errors: null,
+export const initialState: DomainState = {
+    errors: [],
 }
 
 const domainReducer = (state: DomainState = initialState, action: DomainDispatches) => {
@@ -46,17 +56,35 @@ const domainReducer = (state: DomainState = initialState, action: DomainDispatch
             };
         default:
             return state;
-    }
-}
+    };
+};
+
+export default domainReducer;
 `.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
-const reducerTest = (name) => `reducerTest
+const reducerTest = (name) => `import domainReducer, { initialState } from './domain.reducer'
+import DomainActions from './domain.constants';
+
+describe('domainReducer', () => {
+    it('should correctly handle AddError', () => {
+        const newError = 'this is the new test error';
+        const action = {
+            type: DomainActions.AddError,
+            payload: {
+                error: newError,
+            }
+        }
+        const state = domainReducer(initialState, action);
+        expect(state.errors.length).toBe(1)
+        expect(state.errors[0]).toEqual(newError);
+    })
+});
 `.replace(/domain/g, name).replace(/Domain/g, cap(name));
 
 const types = (name) => `import DomainActions from './domain.constants'
 
 export default interface DomainState {
-    errors: string[] | null; // TODO: Add errors to Dispatch type, as per Flux conventions
+    errors: string[]; // TODO: Add errors to Dispatch type, as per Flux conventions
 }
 
 interface DomainDispatch<Action, PayloadType> {
