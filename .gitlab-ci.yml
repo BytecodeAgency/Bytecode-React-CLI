@@ -2,5 +2,7 @@ image: node:12
 
 test_run:
   stage: test
+  before_script:
+    - yarn
   script:
-    - exit 0
+    - yarn run lint:ci
