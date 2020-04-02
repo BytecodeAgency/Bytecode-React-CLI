@@ -5,6 +5,10 @@ const templates = require("./templates");
 const config = {
     options: {
         Component: { path: "src/components", template: "reactWebNoRedux" },
+        Container: { path: "src/containers", template: "reactWebWithRedux" },
+        Section: { path: "src/sections", template: "reactWebWithRedux" },
+        Page: { path: "src/pages", template: "reactWebNoRedux" },
+//        ReduxDomain: { path: "src/store", template: "reduxDomain" },
     },
 };
 

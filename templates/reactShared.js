@@ -32,7 +32,7 @@ module.exports.types = (name) => `export default interface ${name}Props {
 `;
 
 module.exports.connector = (name) => `import { connect } from 'react-redux';
-import ${name} from '${name}';
+import ${name} from './${name}';
 
 const mapStateToProps = (state: ReduxState) => ({
     // Map state to props
