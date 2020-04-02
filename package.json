@@ -1,9 +1,11 @@
 {
   "name": "bytecode-react-cli",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "The Bytecode React CLI tool",
   "main": "index.js",
-  "repository": "git@git.bytecode.nl:bytecode/bytecode-react-cli.git",
+  "repository": "https://github.com/BytecodeAgency/Bytecode-React-CLI.git",
+  "homepage": "https://github.com/BytecodeAgency/Bytecode-React-CLI",
+  "keywords": ["bytecode", "bytecodeagency", "react", "redux", "cli", "code generation"],
   "author": "Luciano Nooijen <luciano@bytecode.nl>",
   "license": "GPL-3.0-only",
   "private": false,
