@@ -5,10 +5,23 @@ const templates = require("./templates");
 const config = {
     // TODO: create support for config file in repo
     options: {
-        Component: { path: "src/components", template: "reactWebNoRedux" },
-        Container: { path: "src/containers", template: "reactWebWithRedux" },
-        Section: { path: "src/sections", template: "reactWebWithRedux" },
-        Page: { path: "src/pages", template: "reactWebNoRedux" },
+        ComponentWeb: { path: "src/components", template: "reactWebNoRedux" },
+        ContainerWeb: { path: "src/containers", template: "reactWebWithRedux" },
+        SectionWeb: { path: "src/sections", template: "reactWebWithRedux" },
+        PageWeb: { path: "src/pages", template: "reactWebNoRedux" },
+        ComponentNative: {
+            path: "src/components",
+            template: "reactNativeNoRedux",
+        },
+        ContainerNative: {
+            path: "src/containers",
+            template: "reactNativeWithRedux",
+        },
+        SectionNative: {
+            path: "src/sections",
+            template: "reactNativeWithRedux",
+        },
+        PageNative: { path: "src/pages", template: "reactNativeNoRedux" },
         ReduxDomain: {
             path: "src/store",
             template: "reduxDomain",
