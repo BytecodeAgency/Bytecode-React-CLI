@@ -6,5 +6,8 @@
   "repository": "git@git.bytecode.nl:bytecode/bytecode-react-cli.git",
   "author": "Luciano Nooijen <luciano@bytecode.nl>",
   "license": "GPL-3.0-only",
-  "private": false
+  "private": false,
+  "bin": {
+    "bcr": "./bin/cli.js"
+  }
 }
