@@ -5,13 +5,13 @@ const reactWebNoRedux = (name) => {
     files[`${name}.tsx`] = main(name);
     files[`${name}.test.tsx`] = tests(name);
     files[`${name}.types.tsx`] = types(name);
-    files[`${name}.components.tsx`] = components(name);
+    files[`${name}.styles.tsx`] = styles(name);
     return files;
 };
 
 module.exports = reactWebNoRedux;
 
-const components = (name) => `import styled from 'styled-components';
+const styles = (name) => `import styled from 'styled-components';
 
 export const ${name}Container = styled.div\`
     margin: 10px;
