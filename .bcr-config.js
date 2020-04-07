@@ -8,7 +8,7 @@ module.exports = {
         },
         PageNative: {
             path: "src/native/screens",
-            template: "reactNativeNoRedux",
+            template: "reactNativeWithRedux",
         },
         PageWeb: { path: "src/web/pages", template: "reactWebWithRedux" },
         ReduxDomain: {

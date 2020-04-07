@@ -26,6 +26,15 @@ describe('${name}', () => {
 });
 `;
 
+module.exports.components = (name) => `import React from 'react';
+
+// Use this file to compose Styled Components so that
+// your main .tsx file can focus on just the logic.
+// See this as your local containers for just ${name}
+// to avoid cluttering components and containers everywhere.
+
+`;
+
 module.exports.types = (name) => `export default interface ${name}Props {
     text: string
 }
