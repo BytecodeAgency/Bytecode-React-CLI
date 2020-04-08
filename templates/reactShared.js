@@ -1,5 +1,6 @@
 module.exports.main = (name) => `import React from 'react';
-import { ${name}Container } from './${name}.components';
+// import { ... } from './${name}.components'; // TODO: Remove or include imports
+import { ${name}Container } from './${name}.styles';
 import ${name}Props from './${name}.types';
 
 const ${name}: React.FC<${name}Props> = ({ text }) => {
