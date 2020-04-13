@@ -12,10 +12,10 @@ const reduxDomain = (name) => {
 module.exports = reduxDomain;
 
 const action = (name) =>
-    `import { Dispatch } from 'react-redux;
+    `import { DomainDispatcher as Dispatch } from './domain.types';
 import DomainActions from './domain.constants';
 
-const domainAddError = (error: string) => (dispatch: Dispatch) => {
+export const domainAddError = (error: string) => (dispatch: Dispatch) => {
     return dispatch({
         type: DomainActions.AddError,
         payload: {
@@ -100,14 +100,15 @@ export default interface DomainState {
     errors: string[]; // TODO: Add errors to Dispatch type, as per Flux conventions
 }
 
-interface DomainDispatch<Action, PayloadType> {
-    type: ActionType;
-    payload: PayloadType;
+interface DomainDispatch<Action, Payload> {
+    type: Action;
+    payload: Payload;
 }
 
 type DomainAddError = DomainDispatch<DomainActions.AddError, { error: string }>
 
 export type DomainDispatches = DomainAddError // | Add more types here
+export type DomainDispatcher = (args: DomainDispatches) => void;
 `
         .replace(/domain/g, name)
         .replace(/Domain/g, cap(name));
