@@ -15,7 +15,7 @@ const action = (name) =>
     `import { DomainDispatcher as Dispatch } from './domain.types';
 import DomainActions from './domain.constants';
 
-const domainAddError = (error: string) => (dispatch: Dispatch) => {
+export const domainAddError = (error: string) => (dispatch: Dispatch) => {
     return dispatch({
         type: DomainActions.AddError,
         payload: {
