@@ -100,9 +100,9 @@ export default interface DomainState {
     errors: string[]; // TODO: Add errors to Dispatch type, as per Flux conventions
 }
 
-interface DomainDispatch<Action, PayloadType> {
-    type: ActionType;
-    payload: PayloadType;
+interface DomainDispatch<Action, Payload> {
+    type: Action;
+    payload: Payload;
 }
 
 type DomainAddError = DomainDispatch<DomainActions.AddError, { error: string }>
