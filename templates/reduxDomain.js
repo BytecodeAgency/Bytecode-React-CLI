@@ -12,7 +12,7 @@ const reduxDomain = (name) => {
 module.exports = reduxDomain;
 
 const action = (name) =>
-    `import { Dispatch } from 'redux;
+`import { DomainDispatcher as Dispatch } from './domain.types';
 import DomainActions from './domain.constants';
 
 const domainAddError = (error: string) => (dispatch: Dispatch) => {
@@ -108,6 +108,7 @@ interface DomainDispatch<Action, Payload> {
 type DomainAddError = DomainDispatch<DomainActions.AddError, { error: string }>
 
 export type DomainDispatches = DomainAddError // | Add more types here
+export type DomainDispatcher = (args: DomainDispatches) => void;
 `
         .replace(/domain/g, name)
         .replace(/Domain/g, cap(name));
