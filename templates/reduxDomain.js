@@ -12,7 +12,7 @@ const reduxDomain = (name) => {
 module.exports = reduxDomain;
 
 const action = (name) =>
-    `import { Dispatch } from 'react-redux;
+    `import { Dispatch } from 'redux;
 import DomainActions from './domain.constants';
 
 const domainAddError = (error: string) => (dispatch: Dispatch) => {
