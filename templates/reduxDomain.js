@@ -15,13 +15,15 @@ const action = (name) =>
     `import { DomainDispatcher as Dispatch } from './domain.types';
 import DomainActions from './domain.constants';
 
-export const domainAddError = (error: string) => (dispatch: Dispatch) => {
-    return dispatch({
-        type: DomainActions.AddError,
-        payload: {
-            error,
-        }
-    })
+const addErrorCreator = (error: string) => ({
+    type: DomainActions.AddError,
+    payload: {
+        error,
+    }
+});
+
+export const domainAddError = (error: string) => (dispatch: Dispatch, getState: ReduxState) => {
+    return dispatch(addErrorCreator(error))
 }
 `
         .replace(/domain/g, name)
