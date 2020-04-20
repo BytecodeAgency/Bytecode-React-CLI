@@ -14,8 +14,20 @@ const ${name}: React.FC<${name}Props> = ({ text }) => {
 export default ${name};
 `;
 
-// TODO: Use react-testing-library
 module.exports.tests = (name) => `import React from 'react';
+import { render, screen } from '@testing-library/react';
+import ${name} from './${name}';
+
+describe('${name}', () => {
+    it('should render', () => {
+        const testText = 'testText';
+        render(<${name} text="test"/>);
+        expect(screen.findByText(testText)).toBeDefined();
+    });
+});
+`;
+
+module.exports.testsEnzyme = (name) => `import React from 'react';
 import { mount } from 'enzyme';
 import ${name} from './${name}';
 

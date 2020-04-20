@@ -1,9 +1,9 @@
-const { main, tests, types } = require("./reactShared");
+const { main, testsEnzyme, types } = require("./reactShared");
 
 const reactWebNoRedux = (name) => {
     const files = {};
     files[`${name}.tsx`] = main(name);
-    files[`${name}.test.tsx`] = tests(name);
+    files[`${name}.test.tsx`] = testsEnzyme(name);
     files[`${name}.types.tsx`] = types(name);
     files[`${name}.styles.tsx`] = styles(name);
     return files;
