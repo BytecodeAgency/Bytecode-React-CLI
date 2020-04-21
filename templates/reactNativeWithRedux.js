@@ -1,4 +1,10 @@
-const { main, testsEnzyme, components, types, connector } = require("./reactShared");
+const {
+    main,
+    testsEnzyme,
+    components,
+    types,
+    connector,
+} = require("./reactShared");
 
 const reactWebWithRedux = (name) => {
     const files = {};
