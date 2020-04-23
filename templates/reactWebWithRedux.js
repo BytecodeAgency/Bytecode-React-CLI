@@ -1,6 +1,5 @@
 const {
     mainConnected,
-    tests,
     components,
     types,
     connector,
@@ -24,4 +23,17 @@ const styles = (name) => `import styled from 'styled-components';
 export const ${name}Container = styled.div\`
     margin: 10px;
 \`
+`;
+
+const tests = (name) => `import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { ${name} } from './${name}';
+
+describe('${name}', () => {
+    it('should render', () => {
+        const testText = 'testText';
+        render(<${name} text={testText}/>);
+        expect(screen.findByText(testText)).toBeDefined();
+    });
+});
 `;

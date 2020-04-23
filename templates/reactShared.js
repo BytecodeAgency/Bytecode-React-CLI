@@ -33,31 +33,6 @@ const Connected${name} = connect${name}(${name});
 export default Connected${name};
 `;
 
-module.exports.tests = (name) => `import React from 'react';
-import { render, screen } from '@testing-library/react';
-import ${name} from './${name}';
-
-describe('${name}', () => {
-    it('should render', () => {
-        const testText = 'testText';
-        render(<${name} text="test"/>);
-        expect(screen.findByText(testText)).toBeDefined();
-    });
-});
-`;
-
-module.exports.testsEnzyme = (name) => `import React from 'react';
-import { mount } from 'enzyme';
-import ${name} from './${name}';
-
-describe('${name}', () => {
-    it('should render', () => {
-        const wrapper = mount(<${name} text="test"/>);
-        expect(wrapper.type()).toEqual(${name});
-    });
-});
-`;
-
 module.exports.components = (name) => `import React from 'react';
 
 // Use this file to compose Styled Components so that
