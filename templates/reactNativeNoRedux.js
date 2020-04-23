@@ -4,8 +4,8 @@ const reactWebNoRedux = (name) => {
     const files = {};
     files[`${name}.tsx`] = main(name);
     files[`${name}.test.tsx`] = testsEnzyme(name);
-    files[`${name}.types.tsx`] = types(name);
-    files[`${name}.styles.tsx`] = styles(name);
+    files[`${name}.types.ts`] = types(name);
+    files[`${name}.styles.ts`] = styles(name);
     return files;
 };
 

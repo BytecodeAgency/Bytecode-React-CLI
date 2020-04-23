@@ -14,6 +14,25 @@ const ${name}: React.FC<${name}Props> = ({ text }) => {
 export default ${name};
 `;
 
+module.exports.mainConnected = (name) => `import React from 'react';
+// import { ... } from './${name}.components'; // TODO: Remove or include imports
+import { ${name}Container } from './${name}.styles';
+import ${name}Props from './${name}.types';
+import connect${name} from './${name}.connector';
+
+export const ${name}: React.FC<${name}Props> = ({ text }) => {
+    return (
+        <${name}Container>
+            {text}
+        </${name}Container>
+    );
+};
+
+const Connected${name} = connect${name}(${name});
+
+export default Connected${name};
+`;
+
 module.exports.tests = (name) => `import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ${name} from './${name}';
@@ -54,13 +73,13 @@ module.exports.types = (name) => `export default interface ${name}Props {
 `;
 
 module.exports.connector = (name) => `import { connect } from 'react-redux';
-import ${name} from './${name}';
 
 const mapStateToProps = (state: ReduxState) => ({
     // Map state to props
 });
 const mapDispatchToProps = {};
-const Connected${name} = connect(mapStateToProps, mapDispatchToProps)(${name});
 
-export default Connected${name};
+const conenct${name} = <T>(Component: T) => connect(mapStateToProps, mapDispatchToProps)(${name});
+
+export default connect${name};
 `;

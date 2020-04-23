@@ -1,5 +1,5 @@
 const {
-    main,
+    mainConnected,
     testsEnzyme,
     components,
     types,
@@ -8,12 +8,12 @@ const {
 
 const reactWebWithRedux = (name) => {
     const files = {};
-    files[`${name}.tsx`] = main(name);
+    files[`${name}.tsx`] = mainConnected(name);
     files[`${name}.test.tsx`] = testsEnzyme(name);
-    files[`${name}.types.tsx`] = types(name);
-    files[`${name}.styles.tsx`] = styles(name);
+    files[`${name}.types.ts`] = types(name);
+    files[`${name}.styles.ts`] = styles(name);
     files[`${name}.components.tsx`] = components(name);
-    files[`${name}.connector.tsx`] = connector(name);
+    files[`${name}.connector.ts`] = connector(name);
     return files;
 };
 
