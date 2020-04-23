@@ -54,7 +54,7 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 const mapDispatchToProps = {};
 
-const conenct${name} = <T>(Component: T) => connect(mapStateToProps, mapDispatchToProps)(${name});
+const connect${name} = connect(mapStateToProps, mapDispatchToProps);
 
 export default connect${name};
 `;

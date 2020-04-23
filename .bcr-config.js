@@ -15,7 +15,7 @@ module.exports = {
             template: "reactWebNoRedux",
         },
         WebWithRedux: {
-            path: "src/nativeWithRedux",
+            path: "src/webWithRedux",
             template: "reactWebWithRedux",
         },
         ReduxDomain: {
