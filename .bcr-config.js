@@ -2,15 +2,22 @@
 // Do NOT copy-paste this file for use in your own projects
 module.exports = {
     options: {
-        ComponentShared: {
-            path: "src/shared/components",
-            template: "reactWebNoRedux",
+        NativeNoRedux: {
+            path: "src/nativeNoRedux",
+            template: "reactNativeNoRedux",
         },
-        PageNative: {
-            path: "src/native/screens",
+        NativeWithRedux: {
+            path: "src/nativeWithRedux",
             template: "reactNativeWithRedux",
         },
-        PageWeb: { path: "src/web/pages", template: "reactWebWithRedux" },
+        WebNoRedux: {
+            path: "src/webNoRedux",
+            template: "reactWebNoRedux",
+        },
+        WebWithRedux: {
+            path: "src/webWithRedux",
+            template: "reactWebWithRedux",
+        },
         ReduxDomain: {
             path: "src/store",
             template: "reduxDomain",

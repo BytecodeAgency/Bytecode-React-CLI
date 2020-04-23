@@ -1,6 +1,5 @@
 const {
-    main,
-    testsEnzyme,
+    mainConnected,
     components,
     types,
     connector,
@@ -8,12 +7,12 @@ const {
 
 const reactWebWithRedux = (name) => {
     const files = {};
-    files[`${name}.tsx`] = main(name);
-    files[`${name}.test.tsx`] = testsEnzyme(name);
-    files[`${name}.types.tsx`] = types(name);
-    files[`${name}.styles.tsx`] = styles(name);
+    files[`${name}.tsx`] = mainConnected(name);
+    files[`${name}.test.tsx`] = tests(name);
+    files[`${name}.types.ts`] = types(name);
+    files[`${name}.styles.ts`] = styles(name);
     files[`${name}.components.tsx`] = components(name);
-    files[`${name}.connector.tsx`] = connector(name);
+    files[`${name}.connector.ts`] = connector(name);
     return files;
 };
 
@@ -25,3 +24,15 @@ export const ${name}Container = styled.Text\`
     margin: 10px;
 \`
 `;
+
+const tests = (testsEnzymeRedux = (name) => `import React from 'react';
+import { mount } from 'enzyme';
+import { ${name} } from './${name}';
+
+describe('${name}', () => {
+    it('should render', () => {
+        const wrapper = mount(<${name} text={testText}/>);
+        expect(wrapper.type()).toEqual(${name});
+    });
+});
+`);
