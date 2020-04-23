@@ -23,10 +23,10 @@ import { render, screen } from '@testing-library/react';
 import ${name} from './${name}';
 
 describe('${name}', () => {
-    it('should render', () => {
+    it('should render', async () => {
         const testText = 'testText';
         render(<${name} text={testText}/>);
-        expect(screen.findByText(testText)).toBeDefined();
+        expect(await screen.findByText(testText)).toBeDefined();
     });
 });
 `
