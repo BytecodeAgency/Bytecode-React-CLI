@@ -25,7 +25,7 @@ export const ${name}Container = styled.Text\`
 \`
 `;
 
-const tests = testsEnzymeRedux = (name) => `import React from 'react';
+const tests = (testsEnzymeRedux = (name) => `import React from 'react';
 import { mount } from 'enzyme';
 import { ${name} } from './${name}';
 
@@ -35,4 +35,4 @@ describe('${name}', () => {
         expect(wrapper.type()).toEqual(${name});
     });
 });
-`;
+`);

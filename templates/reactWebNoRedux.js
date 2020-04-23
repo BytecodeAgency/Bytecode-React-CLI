@@ -29,4 +29,4 @@ describe('${name}', () => {
         expect(await screen.findByText(testText)).toBeDefined();
     });
 });
-`
+`;
