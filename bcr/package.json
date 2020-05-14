@@ -1,0 +1,9 @@
+{
+  "name": "bcr",
+  "version": "1.0.0",
+  "description": "Correct package: bytecode-react-cli",
+  "main": "index.js",
+  "author": "Luciano Nooijen <luciano@bytecode.nl>",
+  "license": "MIT",
+  "private": false
+}
