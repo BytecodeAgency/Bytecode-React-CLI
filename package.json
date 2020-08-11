@@ -1,6 +1,6 @@
 {
   "name": "bytecode-react-cli",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "The Bytecode React CLI tool",
   "main": "index.js",
   "repository": "https://github.com/BytecodeAgency/Bytecode-React-CLI.git",
