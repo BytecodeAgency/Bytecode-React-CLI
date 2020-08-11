@@ -53,7 +53,7 @@ export const initialState: DomainState = {
     errors: [],
 }
 
-const domainReducer = (state: DomainState = initialState, action: DomainDispatches) => {
+const domainReducer = (state: DomainState = initialState, action: DomainDispatches): DomainState => {
     switch (action.type) {
         case DomainActions.AddError:
             return {
